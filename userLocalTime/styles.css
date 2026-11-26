@@ -1,0 +1,8 @@
+.vc-localtime {
+    margin-left: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted, #949ba4);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}

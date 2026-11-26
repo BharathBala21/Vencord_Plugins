@@ -1,0 +1,152 @@
+/* Lets the showdown's sepia fade in and out smoothly */
+[class*="messagesWrapper"] {
+    transition: filter 0.35s ease;
+}
+
+body.vc-gravity-showdown [class*="messagesWrapper"] {
+    filter: sepia(0.9) saturate(0.65) contrast(1.15) brightness(0.85);
+}
+
+/* Hide the real chat while the fake falling copies are shown */
+body.vc-gravity-all [class*="messagesWrapper"] {
+    visibility: hidden;
+}
+
+.vc-gravity-overlay {
+    position: fixed;
+    z-index: 100;
+    /* Visible so kicked messages can fly across the whole window */
+    overflow: visible;
+    user-select: none;
+    /* Only the falling messages catch the mouse, so the real chat stays usable around them */
+    pointer-events: none;
+}
+
+.vc-gravity-body {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 0 !important;
+    box-sizing: border-box;
+    overflow: hidden;
+    list-style: none;
+    border-radius: 8px;
+    background: var(--background-base-lower, var(--background-primary, #313338));
+    box-shadow: 0 2px 8px rgb(0 0 0 / 35%);
+    cursor: grab;
+    pointer-events: auto;
+    will-change: transform;
+}
+
+/* The copies are props: clicking a link or button inside them should grab the message instead */
+.vc-gravity-body * {
+    pointer-events: none !important;
+}
+
+.vc-gravity-held {
+    cursor: grabbing;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 50%);
+}
+
+.vc-gravity-boot,
+.vc-gravity-boom,
+.vc-gravity-crosshair,
+.vc-gravity-bang,
+.vc-gravity-flash {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.vc-gravity-boot {
+    filter: drop-shadow(0 3px 4px rgb(0 0 0 / 40%));
+}
+
+.vc-gravity-boom {
+    font-size: 48px;
+    line-height: 1;
+}
+
+.vc-gravity-crosshair {
+    filter: drop-shadow(0 0 3px rgb(0 0 0 / 70%));
+}
+
+.vc-gravity-flash {
+    inset: 0;
+    background: #fff;
+}
+
+.vc-gravity-bang {
+    font-size: 34px;
+    font-weight: 900;
+    font-style: italic;
+    color: #ffd43b;
+    -webkit-text-stroke: 2px #c92a2a;
+    text-shadow: 3px 3px 0 #000;
+    white-space: nowrap;
+}
+
+/* A burnt-edged hole you can see the darkness through */
+.vc-gravity-hole {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, #050505 0 42%, #2b1a10 55%, rgb(60 40 20 / 50%) 68%, transparent 72%);
+    pointer-events: none;
+}
+
+/* Chunks are plain windows; the copy inside provides the look */
+.vc-gravity-chunk {
+    background: none;
+    border-radius: 0;
+    box-shadow: none;
+    overflow: visible;
+    filter: drop-shadow(0 0 1px rgb(0 0 0 / 80%)) drop-shadow(0 3px 4px rgb(0 0 0 / 45%));
+}
+
+.vc-gravity-chunk-clip {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.vc-gravity-chunk-inner {
+    box-shadow: none !important;
+    pointer-events: none !important;
+}
+
+/* ---------- western showdown ---------- */
+
+.vc-gravity-vignette {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 45%, rgb(40 12 0 / 55%) 80%, rgb(15 4 0 / 85%) 100%);
+}
+
+.vc-gravity-heartbeat {
+    background: radial-gradient(ellipse at center, transparent 55%, rgb(120 10 0 / 35%) 100%);
+}
+
+.vc-gravity-timer {
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    bottom: 14px;
+    height: 4px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #c92a2a, #f08c00);
+    box-shadow: 0 0 6px rgb(240 140 0 / 70%);
+    transform-origin: left center;
+    pointer-events: none;
+}
+
+.vc-gravity-mark {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+    filter: drop-shadow(0 0 2px rgb(0 0 0 / 90%));
+}
+
+.vc-gravity-mark svg {
+    display: block;
+}
